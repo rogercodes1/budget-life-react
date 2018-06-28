@@ -5,10 +5,11 @@ import SignUp from './signUp.js';
 import {Menu, Segment} from 'semantic-ui-react';
 
 class LoginSignUpContainer extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
     this.state = {
         activeItem: 'signUp',
+
     }
 
 
@@ -18,6 +19,9 @@ handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name })
 }
         render(){
+          console.log(this.props,"this isprops");
+          console.log(this.props.token,"token");
+
         return (
             <div id="loginSignUp">
                 <div>
@@ -34,7 +38,7 @@ handleItemClick = (e, { name }) => {
                 </Menu>
                 </div>
                 <Segment>
-                    {(this.state.activeItem ==="signUp") ? <SignUp /> : <Login/>}
+                    {(this.state.activeItem ==="signUp") ? <SignUp {...this.props} /> : <Login {...this.props}/>}
 
 
                 </Segment>

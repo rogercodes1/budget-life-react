@@ -6,8 +6,8 @@ let url = "http://localhost:3001/api/v1/users"
 
 
 class SignUp extends Component{
-     constructor(){
-        super();
+     constructor(props){
+        super(props);
 
         this.state={
             first_name: "",
@@ -29,7 +29,14 @@ handleSubmit = (event) => {
     const body = this.state
     adapter.post(url,body)
     .then(response=>response.json())
-    .then(user => console.log(user,"what is it"))
+    .then(json => {
+      console.log("json",json);
+      localStorage.setItem('token', json.token);
+      localStorage.setItem('id', json.id);
+      console.log("history", this.props.history);
+      debugger
+      this.props.history.push("/home")
+    })
 }
 
     render() {

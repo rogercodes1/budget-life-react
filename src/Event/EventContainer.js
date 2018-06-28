@@ -1,7 +1,7 @@
 import React from "react";
 import adapter from "../adapter.js";
 import EventForm from "./EventForm.js";
-import EventsCollection from "./EventsCollection.js";
+import EventsList from "./eventsList.js";
 
 class EventContainer extends React.Component {
   constructor() {
@@ -20,11 +20,11 @@ class EventContainer extends React.Component {
     adapter.get("http://localhost:3001/api/v1/event_plannings")
     .then(response => response.json())
     .then(data => {
-      //sort this data because after successful path, this is causing a rerender which
-      //actually changes the order in which the card appears. LOOKS AT THE API!!
-      const sortedData = data.sort((eventObj1, eventObj2) => {
+
+      console.log("this data",data);
+      const sortedData = (data.status==="unauthorized") ? []:  data.sort((eventObj1, eventObj2) => {
         return eventObj1.id - eventObj2.id
-      });
+      })
 
       this.setState({
         events: sortedData
@@ -62,7 +62,7 @@ class EventContainer extends React.Component {
       <div id="eventCont">
         <h1>Events</h1>
         <EventForm addNewEvent={this.addNewEvent}/>
-        <EventsCollection removeEvent={this.removeEvent} editEvent={this.editEvent} events={this.state.events}/>
+        <EventsList removeEvent={this.removeEvent} editEvent={this.editEvent} events={this.state.events}/>
       </div>
     );
   }

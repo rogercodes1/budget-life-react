@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 //import PropTypes from 'prop-types'
 import { Menu, Icon, Dropdown } from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom';
+// import AuthO from './AuthO'
+
 class NavBar extends Component{
      constructor(){
         super();
@@ -36,8 +38,8 @@ class NavBar extends Component{
 
         <Menu.Item
             as={NavLink}
-            to="/event_plannings"
-          name='eventPlanning'
+            to="/events"
+        name='eventPlanning'
           active={activeItem === 'eventPlanning'}
           onClick={this.handleClick}>
           <Icon name="calendar alternate"/>Event Planning

@@ -2,21 +2,14 @@ import React, {Component} from "react";
 import { Table } from 'semantic-ui-react';
 
 class BillsCollection extends Component {
-  constructor(props){
-    super(props);
-  }
 
-  getFormattedDate = (billDate) => {
-    const splittedDate = billDate.slice(0, 10).split("-");
-
-    return [splittedDate[1], splittedDate[2], splittedDate[0]].join("/");
-  }
 
   displayTransactions = () => {
-    return (this.props.bills.map(bill => {
+    console.log("bills props", this.props.bills);
+    (this.props.bills === []) ?  [] : (this.props.bills.map(bill => {
       const category = this.props.categories.find(cat => {
         return bill.category_id === cat.id
-      });
+      })
 
       return (
         <Table.Row key={bill.id}>
@@ -26,13 +19,12 @@ class BillsCollection extends Component {
           <Table.Cell>{category.name}</Table.Cell>
           <Table.Cell><i style={{color: "red"}} onClick={() => {this.props.removeBill(bill)}} className="window close icon"></i></Table.Cell>
         </Table.Row>
-      );
-    }));
+        )
+      })
+    )
   }
 
   render(){
-    let transactions = this.displayTransactions();
-
     return (
       <div id="billCollect">
        {this.props.bills.length > 0 ?
@@ -47,7 +39,7 @@ class BillsCollection extends Component {
            </Table.Row>
          </Table.Header>
          <Table.Body>
-           {transactions}
+           {this.displayTransactions()}
          </Table.Body>
        </Table>
        :
