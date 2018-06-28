@@ -1,22 +1,23 @@
 import React, {Component} from 'react'
 
 import { Menu, Icon, Dropdown } from 'semantic-ui-react'
-import {NavLink} from 'react-router-dom';
+import {Redirect, NavLink} from 'react-router-dom';
 // import AuthO from './AuthO'
 
 class NavBar extends Component{
      constructor(props){
         super(props);
-
         this.state={
             activeItem: "home"
         }
     }
     handleClick = (e, { name }) => this.setState({ activeItem: name })
     handleLogout = (e) => {
+
       delete localStorage.id
       delete localStorage.token
-      this.props.history.push("/")
+      // this.props.history.push("/")
+      {<Redirect to="/"/>}
     }
 
     render() {

@@ -11,7 +11,6 @@ import AuthO from './AuthO'
 
 class App extends Component {
     state={
-        token:"",
         user_id: null,
     }
 
@@ -27,7 +26,7 @@ setUserId = (user_id) =>this.setState({user_id})
 
         {AuthO.loggedIn() ?
             <React.Fragment>
-              <NavBar />
+              <NavBar/>
               <Route exact path="/home" render={(props) => <HomeContainer {...props}
                 user_id={this.state.user_id}/> } />
               <Route exact path="/transactions" render={(props) => <Transactions {...props} user_id={this.state.user_id}/> } />
@@ -39,8 +38,9 @@ setUserId = (user_id) =>this.setState({user_id})
 
 
       }
-      <Route exact path="/" render={(props) => <LoginSignUpContainer
-          setUserId={this.setUserId} {...props} /> } />
+      {AuthO.loggedIn()? <Redirect to="/home"/> :
+        <Route exact path="/" render={(props) => <LoginSignUpContainer
+          setUserId={this.setUserId} {...props} /> } />}
       </div>
     );
   }
