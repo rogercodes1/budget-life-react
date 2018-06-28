@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 //import PropTypes from 'prop-types'
 import { Table } from 'semantic-ui-react'
-import fetchCats from '../Helpers/categoryHelper.js';
-
-// import adapter from './../adapter';
-let totalIncome = 0
-let totalExpenses = 0
+//
+// let totalIncome = 0
+// let totalExpenses = 0
 class TransactionList extends Component{
      constructor(props){
         super(props)
@@ -17,12 +15,16 @@ class TransactionList extends Component{
     }
 
 displayTransactions = () => {
-
-   return  (this.props.transactions.map(row=>{
-      this.totalAmounts(row.category, row.amount)
+  console.log("transactions", this.props.transactions);
+  console.log("categories", this.props.categories);
+  return (this.props.transactions !== undefined) ?
+   (this.props.transactions.map(row=>{
+      // this.totalAmounts(row.category, row.amount)
        const category = this.props.categories.find(cat=>{
+
          return row.category_id === cat.id
          })
+
        let date = row.date.split("-")
        let mm = date[1]
        let dd = date[2].split("T")[0]
@@ -41,14 +43,16 @@ displayTransactions = () => {
             </Table.Row>)
          })
    )
+   : null
 }
-totalAmounts = (category, amount) => {
-   if (category==="income"){
-      totalIncome += amount
-   } else {
-      totalExpenses += amount
-   }
-}
+
+// totalAmounts = (category, amount) => {
+//    if (category==="income"){
+//       totalIncome += amount
+//    } else {
+//       totalExpenses += amount
+//    }
+// }
 
     render() {
       let transactions = this.displayTransactions()

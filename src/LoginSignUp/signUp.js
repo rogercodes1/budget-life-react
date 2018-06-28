@@ -8,7 +8,6 @@ let url = "http://localhost:3001/api/v1/users"
 class SignUp extends Component{
      constructor(props){
         super(props);
-
         this.state={
             first_name: "",
             last_name: "",
@@ -33,8 +32,10 @@ handleSubmit = (event) => {
       console.log("json",json);
       localStorage.setItem('token', json.token);
       localStorage.setItem('id', json.id);
+      this.props.setUserId(json.id)
+      // this.setState(user_id : json.id)
+
       console.log("history", this.props.history);
-      debugger
       this.props.history.push("/home")
     })
 }

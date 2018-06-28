@@ -9,17 +9,18 @@ import EventContainer from './Event/EventContainer.js';
 import {Route, Redirect } from 'react-router-dom';
 import AuthO from './AuthO'
 
-
-
 class App extends Component {
     state={
-        token:""
+        token:"",
+        user_id: null,
     }
+
+setUserId = (user_id) =>this.setState({user_id})
   render() {
 
     // <Route exact path="/" component={LoginSignUpContainer}></Route>
     // <Route exact path="/transactions" component={Transaction}></Route>
-    console.log("value", AuthO.loggedIn());
+    console.log(this.state);
     return (
       <div className="App">
 
@@ -27,20 +28,23 @@ class App extends Component {
         {AuthO.loggedIn() ?
             <React.Fragment>
               <NavBar />
-              <Route exact path="/home" render={(props) => <HomeContainer {...props} /> } />
-              <Route exact path="/transactions" render={(props) => <Transactions {...props} /> } />
-              <Route exact path="/events" render={(props) => <EventContainer {...props} /> } />
-              <Route exact path="/bills" render={(props) => <BillContainer {...props} /> } />
+              <Route exact path="/home" render={(props) => <HomeContainer {...props}
+                user_id={this.state.user_id}/> } />
+              <Route exact path="/transactions" render={(props) => <Transactions {...props} user_id={this.state.user_id}/> } />
+              <Route exact path="/events" render={(props) => <EventContainer {...props} user_id={this.state.user_id}/> } />
+              <Route exact path="/bills" render={(props) => <BillContainer {...props} user_id={this.state.user_id}/> } />
               </React.Fragment>
 
         : <Redirect to="/"/>
 
 
       }
-      <Route exact path="/" render={(props) => <LoginSignUpContainer {...props} /> } />
+      <Route exact path="/" render={(props) => <LoginSignUpContainer
+          setUserId={this.setUserId} {...props} /> } />
       </div>
     );
   }
 }
+
 
 export default App;

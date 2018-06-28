@@ -17,7 +17,7 @@ class BillForm extends React.Component {
       description: "",
       category_id: 1,
       amount_due: 10.50,
-      user_id: 1,
+      user_id: this.props.user_id,
     };
   }
 

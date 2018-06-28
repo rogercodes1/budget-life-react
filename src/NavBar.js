@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-//import PropTypes from 'prop-types'
+
 import { Menu, Icon, Dropdown } from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom';
 // import AuthO from './AuthO'
@@ -13,14 +13,10 @@ class NavBar extends Component{
         }
     }
     handleClick = (e, { name }) => this.setState({ activeItem: name })
-    handleLogout = (e, {token}) => {
-      console.log("e.target", e.target );
-      console.log("localStorage", localStorage);
-      debugger;
+    handleLogout = (e) => {
       delete localStorage.id
       delete localStorage.token
       this.props.history.push("/")
-
     }
 
     render() {

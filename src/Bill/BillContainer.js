@@ -4,8 +4,8 @@ import BillForm from "./BillForm.js";
 import BillsCollection from "./BillsCollection.js";
 
 class BillContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       categories: [],
@@ -49,7 +49,7 @@ class BillContainer extends Component {
   render() {
     return (
       <div id="billCont">
-        <BillForm addNewBill={this.addNewBill} categories={this.state.categories}/>
+        <BillForm user_id={this.props.user_id} addNewBill={this.addNewBill} categories={this.state.categories}/>
         <BillsCollection removeBill={this.removeBill} categories={this.state.categories} bills={this.state.bills}/>
       </div>
     );

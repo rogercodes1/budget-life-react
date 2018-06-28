@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
 import { Button, Form, Input } from 'semantic-ui-react'
 import adapter from './../adapter';
-import Categories from '../Helpers/categoryHelper.js';
-//import PropTypes from 'prop-types'
-// let dateFormat = require('dateformat');
-// let now = new Date()
+
+
 let url = "http://localhost:3001/api/v1/transactions"
 
 const options = [
@@ -15,13 +13,14 @@ const options = [
 class TransactionForm extends Component{
      constructor(props){
         super(props);
+
         this.state={
            date: "",
            description:"",
-           category_id: null,
+           category_id: 1,
            transaction_type : null,
            amount : null,
-           user_id: 1,
+           user_id: this.props.user_id,
         }
     }
     handleChange = (e, {name, value}) => {
@@ -36,10 +35,18 @@ class TransactionForm extends Component{
     }
 
     handleSubmit = (e) => {
-      console.log(this.state);
+      console.log("handleSubmit",this.state);
       e.preventDefault()
-      let body = this.state
-      adapter.post(url,body)
+      let body = {
+        date: this.state.date,
+        description:this.state.description,
+        category_id: this.state.category_id,
+        transaction_type : this.state.transaction_type,
+        amount : this.state.amount,
+        user_id: localStorage.id,
+      }
+      console.log(body);
+      adapter.post(url, body)
          .then(response=>response.json())
          .then(transaction=>this.props.addNewTransaction(transaction))
          // .then(transaction=>console.log(transaction, "what is"))
@@ -48,7 +55,7 @@ class TransactionForm extends Component{
     }
 
   render() {
-     let categories = Categories(this.props.categories)
+
     return (
         <div id="transaction-form">
       <Form onSubmit={this.handleSubmit}>
@@ -76,7 +83,7 @@ class TransactionForm extends Component{
              onChange={this.handleChange}
              name="category_id"
              label='Category'
-             options={categories}
+             options={this.props.categories}
              placeholder='Category' />
 
           <Form.Select

@@ -16,7 +16,7 @@ class Login extends Component{
     event.preventDefault();
     console.log(event.target);
     console.log("THIS.STATE",this.state);
-    debugger;
+
     const body = this.state
     adapter.post(url,body)
     .then(response=>response.json())
@@ -24,6 +24,8 @@ class Login extends Component{
       console.log("json", json)
       localStorage.setItem('token', json.token);
       localStorage.setItem('id', json.id);
+      this.props.setUserId(json.id)
+
       console.log("localStorage", localStorage);
       console.log("history", this.props.history);
       this.props.history.push("/home")

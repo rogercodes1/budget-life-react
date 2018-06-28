@@ -3,14 +3,13 @@ import React, {Component} from 'react'
 import TransactionList from './transactionList';
 import TransactionForm from './transactionForm';
 // import { Radio } from 'semantic-ui-react'
-// let dateFormat = require('dateformat');
-// let now = new Date()
+import Categories from '../Helpers/categoryHelper.js';
 let url = "http://localhost:3001/api/v1/"
 
 
 class Transaction extends Component{
-     constructor(){
-        super();
+     constructor(props){
+        super(props);
 
         this.state={
            transactions:[],
@@ -35,31 +34,40 @@ class Transaction extends Component{
                transactions, categories
             },()=>{console.log("currentState",this.state)}))
 
-      // fetch(`${url}users/${localStorage.id}/transactions/`,
-      //   {headers: {
-      //       "Content-Type": 'application/json',
-      //       "Accept": "application/json",
-      //       "Authorization": `${localStorage.getItem("token")}`
-      //       }
-      //     })
-      //  .then((res1)=>res1.json())
-      //  .then(transactions=>this.setState({transactions}))
+        // Promise.all([
+        //   fetch(`${url}transactions/`,
+        //     {headers: {
+        //         "Content-Type": 'application/json',
+        //         "Accept": "application/json",
+        //         "Authorization": `${localStorage.getItem("token")}`
+        //         }
+        //       }),
+        //   fetch(`${url}categories`)])
+        //    .then(([res1,res2])=>Promise.all([res1.json(), res2.json()]))
+        //    .then(([transactions,categories])=>this.setState({
+        //          transactions, categories
+        //       },()=>{console.log("currentState",this.state)}))
+
+
    }
 
     addNewTransaction = (newTransaction) => {
-      this.setState({transactions: [...this.state.transactions, newTransaction]},() => console.log(this.state))
+      this.setState({transactions: [...this.state.transactions, newTransaction]},() => console.log("newTransaction",this.state))
     }
     render() {
-      console.log("cats",this.state.categories);
         return (
             <div id="transactionCont">
                 <TransactionForm
-                   categories={this.state.categories}
+                   user_id={this.props.user_id}
+                   categories={Categories(this.state.categories)}
                    addNewTransaction={this.addNewTransaction}
                    onClick={this.handleSubmit}/>
-                <TransactionList
-                   categories={this.state.categories}
-                   transactions={this.state.transactions}/>
+
+                 {this.state.transactions !== undefined && this.state.transactions.length !== 0 ?
+                   <TransactionList
+                     categories={Categories(this.state.categories)}
+                     transactions={this.state.transactions.transactions}/> :
+                    "No Current Transactions, Please add a new one!" }
             </div>
         );
     }
