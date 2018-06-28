@@ -1,30 +1,56 @@
 import React, {Component} from 'react'
 //import PropTypes from 'prop-types'
-import {Form,Input, Button} from 'semantic-ui-react';
-
+import {Form, Input, Button} from 'semantic-ui-react';
+import adapter from './../adapter.js';
+let url = "http://localhost:3001/sessions/"
 class Login extends Component{
      constructor(){
         super();
-
         this.state={
+          email: "",
+          password: "",
 
         }
     }
+    handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target);
+    console.log("THIS.STATE",this.state);
+    debugger;
+    const body = this.state
+    adapter.post(url,body)
+    .then(response=>response.json())
+    .then(json => {
+      console.log("json", json)
+      localStorage.setItem('token', json.token);
+      localStorage.setItem('id', json.id);
+      console.log("localStorage", localStorage);
+      console.log("history", this.props.history);
+      this.props.history.push("/home")
+    })
+  }
+  handleChange = (e) => {
+      console.log("before",e.target.name, "other", e.target.value)
+      this.setState({[e.target.name] : e.target.value}, () => console.log(this.state))
+  }
+
     render() {
         return (
             <div id="login">
-                <Form>
+                <Form onSubmit={this.handleSubmit}>
                     <Form.Field
+                      onChange={this.handleChange}
                         control={Input}
                         label="Email"
                         type="email"
-                        name="Email"
+                        name="email"
                         placeholder="Enter Email"/>
                     <Form.Field
+                      onChange={this.handleChange}
                         control={Input}
                         label="Password"
                         type="password"
-                        name="firstName"
+                        name="password"
                         placeholder="Enter Password"/>
                     <Form.Field id="loginButton" control={Button}>Login</Form.Field>
 

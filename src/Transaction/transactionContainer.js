@@ -14,36 +14,43 @@ class Transaction extends Component{
 
         this.state={
            transactions:[],
-           categories:[]
+           categories: []
+
 
         }
     }
 
     componentDidMount() {
-      console.log(`${url}transactions`);
       Promise.all([
-         fetch(`${url}transactions`),
-         fetch(`${url}categories`)
-      ])
+        fetch(`${url}users/${localStorage.id}/transactions/`,
+          {headers: {
+              "Content-Type": 'application/json',
+              "Accept": "application/json",
+              "Authorization": `${localStorage.getItem("token")}`
+              }
+            }),
+        fetch(`${url}categories`)])
          .then(([res1,res2])=>Promise.all([res1.json(), res2.json()]))
          .then(([transactions,categories])=>this.setState({
-               transactions,
-               categories
-            },()=>{console.log(this.state)}))
+               transactions, categories
+            },()=>{console.log("currentState",this.state)}))
 
+      // fetch(`${url}users/${localStorage.id}/transactions/`,
+      //   {headers: {
+      //       "Content-Type": 'application/json',
+      //       "Accept": "application/json",
+      //       "Authorization": `${localStorage.getItem("token")}`
+      //       }
+      //     })
+      //  .then((res1)=>res1.json())
+      //  .then(transactions=>this.setState({transactions}))
    }
 
-    // handleSubmit = (e) => {
-    //    let date = e.target.date.value
-    //    let description = e.target.description.value
-    //    let category= e.target.description.value
-    //    let type = e.target.description.value
-    //    console.log(date, description, category, type);
-    // }
     addNewTransaction = (newTransaction) => {
       this.setState({transactions: [...this.state.transactions, newTransaction]},() => console.log(this.state))
     }
     render() {
+      console.log("cats",this.state.categories);
         return (
             <div id="transactionCont">
                 <TransactionForm

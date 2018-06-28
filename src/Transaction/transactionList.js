@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 //import PropTypes from 'prop-types'
 import { Table } from 'semantic-ui-react'
+import fetchCats from '../Helpers/categoryHelper.js';
+
 // import adapter from './../adapter';
 let totalIncome = 0
 let totalExpenses = 0

@@ -5,15 +5,23 @@ import {NavLink} from 'react-router-dom';
 // import AuthO from './AuthO'
 
 class NavBar extends Component{
-     constructor(){
-        super();
+     constructor(props){
+        super(props);
 
         this.state={
             activeItem: "home"
         }
     }
     handleClick = (e, { name }) => this.setState({ activeItem: name })
+    handleLogout = (e, {token}) => {
+      console.log("e.target", e.target );
+      console.log("localStorage", localStorage);
+      debugger;
+      delete localStorage.id
+      delete localStorage.token
+      this.props.history.push("/")
 
+    }
 
     render() {
     const { activeItem } = this.state
@@ -56,8 +64,12 @@ class NavBar extends Component{
         <Menu.Menu position='right'>
             <Dropdown  item icon="setting" simple>
                 <Dropdown.Menu>
-                    <Dropdown.Item >
-                        <Icon name="log out" color="red" value="logout"/>Logout
+                    <Dropdown.Item
+                      onClick={this.handleLogout}>
+                        <Icon
+                          name="log out"
+                          color="red"
+                          value="logout"/>Logout
                     </Dropdown.Item>
                     <Dropdown.Item>
                         <Icon name="user" color="blue" value="user"/>Profile
