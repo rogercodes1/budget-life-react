@@ -12,16 +12,11 @@ class LoginSignUpContainer extends Component{
 
     }
 
-
-
 }
 handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name })
 }
         render(){
-          console.log(this.props,"this isprops");
-          console.log(this.props.token,"token");
-
         return (
             <div id="loginSignUp">
                 <div>
@@ -39,7 +34,7 @@ handleItemClick = (e, { name }) => {
                 </div>
                 <Segment>
                     {(this.state.activeItem ==="signUp") ?
-                      <SignUp {...this.props} setUserId={this.props.setUserId}/> : <Login {...this.props} setUserId={this.props.setUserId}/>}
+                      <SignUp {...this.props} /> : <Login {...this.props} />}
 
 
                 </Segment>
