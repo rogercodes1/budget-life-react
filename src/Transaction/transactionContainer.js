@@ -30,24 +30,9 @@ class Transaction extends Component{
             }),
         fetch(`${url}categories`)])
          .then(([res1,res2])=>Promise.all([res1.json(), res2.json()]))
-         .then(([transactions,categories])=>this.setState({
-               transactions, categories
+         .then(([data,categories])=>this.setState({
+               transactions: data.transactions, categories
             },()=>{console.log("currentState",this.state)}))
-
-        // Promise.all([
-        //   fetch(`${url}transactions/`,
-        //     {headers: {
-        //         "Content-Type": 'application/json',
-        //         "Accept": "application/json",
-        //         "Authorization": `${localStorage.getItem("token")}`
-        //         }
-        //       }),
-        //   fetch(`${url}categories`)])
-        //    .then(([res1,res2])=>Promise.all([res1.json(), res2.json()]))
-        //    .then(([transactions,categories])=>this.setState({
-        //          transactions, categories
-        //       },()=>{console.log("currentState",this.state)}))
-
 
    }
 
@@ -66,7 +51,7 @@ class Transaction extends Component{
                  {this.state.transactions !== undefined && this.state.transactions.length !== 0 ?
                    <TransactionList
                      categories={Categories(this.state.categories)}
-                     transactions={this.state.transactions.transactions}/> :
+                     transactions={this.state.transactions}/> :
                     "No Current Transactions, Please add a new one!" }
             </div>
         );
@@ -74,3 +59,18 @@ class Transaction extends Component{
 }
 
 export default Transaction;
+// console.log(this.state.transactions, newTransaction);
+
+// Promise.all([
+//   fetch(`${url}transactions/`,
+//     {headers: {
+//         "Content-Type": 'application/json',
+//         "Accept": "application/json",
+//         "Authorization": `${localStorage.getItem("token")}`
+//         }
+//       }),
+//   fetch(`${url}categories`)])
+//    .then(([res1,res2])=>Promise.all([res1.json(), res2.json()]))
+//    .then(([transactions,categories])=>this.setState({
+//          transactions, categories
+//       },()=>{console.log("currentState",this.state)}))

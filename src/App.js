@@ -10,9 +10,7 @@ import {Route, Redirect } from 'react-router-dom';
 import AuthO from './AuthO'
 
 class App extends Component {
-    state={
-        user_id: null,
-    }
+
 
 setUserId = (user_id) =>this.setState({user_id})
   render() {
@@ -28,10 +26,10 @@ setUserId = (user_id) =>this.setState({user_id})
             <React.Fragment>
               <NavBar/>
               <Route exact path="/home" render={(props) => <HomeContainer {...props}
-                user_id={this.state.user_id}/> } />
-              <Route exact path="/transactions" render={(props) => <Transactions {...props} user_id={this.state.user_id}/> } />
-              <Route exact path="/events" render={(props) => <EventContainer {...props} user_id={this.state.user_id}/> } />
-              <Route exact path="/bills" render={(props) => <BillContainer {...props} user_id={this.state.user_id}/> } />
+                /> } />
+              <Route exact path="/transactions" render={(props) => <Transactions {...props} /> } />
+              <Route exact path="/events" render={(props) => <EventContainer {...props} /> } />
+              <Route exact path="/bills" render={(props) => <BillContainer {...props} /> } />
               </React.Fragment>
 
         : <Redirect to="/"/>
@@ -40,7 +38,7 @@ setUserId = (user_id) =>this.setState({user_id})
       }
       {AuthO.loggedIn()? <Redirect to="/home"/> :
         <Route exact path="/" render={(props) => <LoginSignUpContainer
-          setUserId={this.setUserId} {...props} /> } />}
+          {...props} /> } />}
       </div>
     );
   }

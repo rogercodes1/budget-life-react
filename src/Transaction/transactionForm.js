@@ -20,7 +20,7 @@ class TransactionForm extends Component{
            category_id: 1,
            transaction_type : null,
            amount : null,
-           user_id: this.props.user_id,
+           user_id: localStorage.id,
         }
     }
     handleChange = (e, {name, value}) => {

@@ -32,7 +32,7 @@ handleSubmit = (event) => {
       console.log("json",json);
       localStorage.setItem('token', json.token);
       localStorage.setItem('id', json.id);
-      this.props.setUserId(json.id)
+
       // this.setState(user_id : json.id)
 
       console.log("history", this.props.history);

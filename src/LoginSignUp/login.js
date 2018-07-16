@@ -21,13 +21,9 @@ class Login extends Component{
     adapter.post(url,body)
     .then(response=>response.json())
     .then(json => {
-      console.log("json", json)
+
       localStorage.setItem('token', json.token);
       localStorage.setItem('id', json.id);
-      this.props.setUserId(json.id)
-
-      console.log("localStorage", localStorage);
-      console.log("history", this.props.history);
       this.props.history.push("/home")
     })
   }

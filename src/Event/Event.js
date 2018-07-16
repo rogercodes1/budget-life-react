@@ -77,7 +77,6 @@ class Event extends React.Component {
                 this.state.isClicked ?
                   <div>
                     <NumericInput
-                      format={this.myFormat}
                       step={1.00}
                       precision={2}
                       min={1}

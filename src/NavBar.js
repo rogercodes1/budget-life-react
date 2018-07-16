@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import { withRouter } from 'react-router'
 import { Menu, Icon, Dropdown } from 'semantic-ui-react'
 import {Redirect, NavLink} from 'react-router-dom';
 // import AuthO from './AuthO'
@@ -13,11 +13,9 @@ class NavBar extends Component{
     }
     handleClick = (e, { name }) => this.setState({ activeItem: name })
     handleLogout = (e) => {
-
-      delete localStorage.id
-      delete localStorage.token
-      // this.props.history.push("/")
-      {<Redirect to="/"/>}
+       localStorage.clear()
+      this.props.history.push("/")
+      // {<Redirect to="/"/>}
     }
 
     render() {
@@ -81,4 +79,4 @@ class NavBar extends Component{
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
