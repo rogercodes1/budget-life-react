@@ -2,6 +2,19 @@ body{
    background-image: url("./budgeting.jpg");
 }
 
+.App-header {
+  background-color: #2f3d65;
+  height: 100px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+
+  font-size: 3em;
+  margin-bottom:0;
+}
+
 #loginSignUp{
     border: 10px solid darkgrey;
     border-radius: 10px;
