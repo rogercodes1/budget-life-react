@@ -30,13 +30,16 @@ handleSubmit = (event) => {
     .then(response=>response.json())
     .then(json => {
       console.log("json",json);
-      localStorage.setItem('token', json.token);
-      localStorage.setItem('id', json.id);
-
-      // this.setState(user_id : json.id)
-
-      console.log("history", this.props.history);
-      this.props.history.push("/home")
+      debugger
+      if (json.status==="accepted"){
+        localStorage.setItem('token', json.token);
+        localStorage.setItem('id', json.id);
+        // this.setState(user_id : json.id)
+        console.log("history", this.props.history);
+        this.props.history.push("/home")
+      } else {
+        alert("User may already exist. Try logging in.")
+      }
     })
 }
 
@@ -92,10 +95,7 @@ handleSubmit = (event) => {
 
                 <Form.Field id="signUpButton"
                     control={Button}>Sign-Up</Form.Field>
-
             </Form>
-
-
             </div>
         );
     }
