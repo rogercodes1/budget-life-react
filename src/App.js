@@ -28,15 +28,18 @@ setUserId = (user_id) =>this.setState({user_id})
         {AuthO.loggedIn() ?
             <React.Fragment>
               <NavBar/>
-              <Route exact path="/home" render={(props) => <HomeContainer {...props}
-                /> } />
-              <Route exact path="/transactions" render={(props) => <Transactions {...props} /> } />
-              <Route exact path="/events" render={(props) => <EventContainer {...props} /> } />
-              <Route exact path="/bills" render={(props) => <BillContainer {...props} /> } />
+              <Route exact path="/home" render={(props) =>
+                  <HomeContainer {...props} /> } />
+              <Route exact path="/transactions" render={(props) =>
+                  <Transactions {...props} /> } />
+              <Route exact path="/events" render={(props) =>
+                  <EventContainer {...props} /> } />
+              <Route exact path="/bills" render={(props) =>
+                  <BillContainer {...props} /> } />
               </React.Fragment>
 
-        : <Route exact path="/" render={(props) => <LoginSignUpContainer
-          {...props} /> } />
+          : <Route exact path="/" render={(props) =>
+          <LoginSignUpContainer {...props} /> } />
 
 
       }
