@@ -25,9 +25,9 @@ class BillContainer extends Component {
     }));
   }
 
-  addNewBill = (billObj) => {
+  addNewBill = (newBill) => {
     this.setState({
-      bills: [...this.state.bills, billObj]
+      bills: [...this.state.bills, newBill]
     });
   }
 
