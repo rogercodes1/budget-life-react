@@ -12,9 +12,7 @@ class EventContainer extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchEvents();
-  }
+  componentDidMount() { this.fetchEvents()}
 
   fetchEvents = () => {
     adapter.get("http://localhost:3001/api/v1/event_plannings")

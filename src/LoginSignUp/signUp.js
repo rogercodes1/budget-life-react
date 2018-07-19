@@ -30,7 +30,6 @@ handleSubmit = (event) => {
     .then(response=>response.json())
     .then(json => {
       console.log("json",json);
-      debugger
       if (json.status==="accepted"){
         localStorage.setItem('token', json.token);
         localStorage.setItem('id', json.id);
@@ -38,6 +37,7 @@ handleSubmit = (event) => {
         console.log("history", this.props.history);
         this.props.history.push("/home")
       } else {
+        debugger
         alert("User may already exist. Try logging in.")
       }
     })
