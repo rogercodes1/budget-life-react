@@ -2,7 +2,7 @@ import React from "react";
 import adapter from "../adapter.js";
 import EventForm from "./EventForm.js";
 import EventsList from "./eventsList.js";
-
+const url = "http://localhost:3001/api/v1/event_plannings"
 class EventContainer extends React.Component {
   constructor() {
     super();
@@ -15,19 +15,16 @@ class EventContainer extends React.Component {
   componentDidMount() { this.fetchEvents()}
 
   fetchEvents = () => {
-    adapter.get("http://localhost:3001/api/v1/event_plannings")
+    adapter.get(url)
     .then(response => response.json())
     .then(data => {
 
       console.log("this data",data);
+      debugger
       const sortedData = (data.status==="unauthorized") ? []:  data.sort((eventObj1, eventObj2) => {
         return eventObj1.id - eventObj2.id
       })
-
-      this.setState({
-        events: sortedData
-      }, () => console.log("eventContainer state", this.state))
-    });
+      this.setState({events: sortedData});
   }
 
   addNewEvent = (eventObj) => {
