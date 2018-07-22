@@ -14,18 +14,22 @@ class EventContainer extends React.Component {
 
   componentDidMount() { this.fetchEvents()}
 
-  fetchEvents = () => {
-    adapter.get(url)
-    .then(response => response.json())
-    .then(data => {
+fetchEvents = () => {
+  adapter.get(url)
+  .then(response => response.json())
+  .then(data => {
 
-      console.log("this data",data);
-      debugger
-      const sortedData = (data.status==="unauthorized") ? []:  data.sort((eventObj1, eventObj2) => {
-        return eventObj1.id - eventObj2.id
+    if (data.status==="unauthorized") {
+      return []
+    }
+    else {
+      const sortedData = data.sort((firstEvent, secEvent) => {
+        return firstEvent.id - secEvent.id
       })
-      this.setState({events: sortedData});
-  }
+    this.setState({events: sortedData});
+   }
+   })
+}
 
   addNewEvent = (eventObj) => {
     this.setState({
