@@ -2,11 +2,7 @@ import React from "react";
 import { Form, Input, Select} from 'semantic-ui-react'
 import Categories from '../Helpers/categoryHelper.js';
 import adapter from "../adapter.js";
-// import CategorySelection from "./CategorySelection.js";
-// import NumericInput from 'react-numeric-input';
-// import DatePicker from 'react-datepicker';
-// import moment from 'moment';
-// import 'react-datepicker/dist/react-datepicker.css';
+
 
 class BillForm extends React.Component {
   constructor(props) {
@@ -17,7 +13,7 @@ class BillForm extends React.Component {
       description: "",
       category_id: 1,
       amount_due: 10.50,
-      user_id: this.props.user_id,
+      user_id: localStorage.id,
     };
   }
 
@@ -45,7 +41,7 @@ class BillForm extends React.Component {
       date: "",
       description: "",
       amount_due: "",
-      user_id: 1,
+
     });
   }
 
