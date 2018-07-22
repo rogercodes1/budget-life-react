@@ -1,12 +1,12 @@
-export function setYelpResultsAction(results) {
+export function addEventAction(results) {
   return {
-    type: "YELP_RESULTS",
-    payload: results
+    type: "ADD_EVENT",
+    payload: addEvent
   }
 }
-export function selectPlaceAction(selectedBusiness) {
+export function addBillAction(selectedBusiness) {
   return {
-    type: "SELECT_EVENT",
-    payload: selectedBusiness
+    type: "ADD_BILL",
+    payload: addBill
   }
 }
