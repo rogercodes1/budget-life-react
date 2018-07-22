@@ -28,13 +28,13 @@ class HomeContainer extends Component {
       adapter.get(url + "event_plannings"),
       adapter.get(url + "categories")
     ])
-    .then(([res1, res2, res3]) => Promise.all([res1.json(), res2.json(), res3.json()]))
+    .then(([resBills, responseEvents, responseCats]) => Promise.all([resBills.json(), responseEvents.json(), responseCats.json()]))
     .then(([bills, events, categories]) => {
+
       console.log("data", bills,events,"categories", categories);
       const latestBills = (bills.status==="unauthorized") ? []: bills.sort((billObj1, billObj2) => {
         return new Date(billObj1.due_date) - new Date(billObj2.due_date);
       }).slice(0, 3);
-
       const latestEvents = (events.status==="unauthorized") ? [] : events.sort((eventObj1, eventObj2) => {
         return new Date(eventObj1.date) - new Date(eventObj2.date);
       }).slice(0, 3);

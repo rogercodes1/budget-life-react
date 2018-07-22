@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import adapter from "../adapter.js";
 import BillForm from "./BillForm.js";
 import BillsCollection from "./BillsCollection.js";
-
+let url = "http://localhost:3001/api/v1/"
 class BillContainer extends Component {
   constructor(props) {
     super(props);
@@ -15,13 +15,13 @@ class BillContainer extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch("http://localhost:3001/api/v1/categories"),
-      fetch("http://localhost:3001/api/v1/bills")
+      fetch(url + "categories"),
+      fetch(url + "bills")
     ])
-    .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-    .then(([data1, data2]) => this.setState({
-      categories: data1,
-      bills: data2
+    .then(([catResponse, billsResponse]) => Promise.all([catResponse.json(), billsResponse.json()]))
+    .then(([categories, bills]) => this.setState({
+      categories: categories,
+      bills: bills
     }));
   }
 
