@@ -1,15 +1,14 @@
 
 const defaultState= {
-  results : [],
-
-  nearbyEvents:[],
+  events:[],
+  bills : [],
+  transactions:[],
   yelpParams: {
     searchTerm: "bars",
     location: "10004",
     radius: 3000,
     limit: 20,
   },
-  eventComments:[],
   geolocation: [],
 }
 
@@ -17,13 +16,17 @@ export default function reducer(state=defaultState,action) {
 
   switch(action.type)
     {
-      case "YELP_RESULTS":
+      case "ADD_EVENT":
         return {
-          ...state, results: action.payload
+          ...state, events: action.payload
           }
-      case "SELECT_EVENT":
+      case "ADD_BILL":
         return {
-          ...state, selectEvent: action.payload
+          ...state, bills: action.payload
+          }
+      case "ADD_TRANSACTION":
+        return {
+          ...state, transactions: action.payload
           }
 
 
