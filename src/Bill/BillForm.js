@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Input, Select} from 'semantic-ui-react'
 import Categories from '../Helpers/categoryHelper.js';
 import adapter from "../adapter.js";
-
+let url = "http://localhost:3001/api/v1/"
 
 class BillForm extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class BillForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    adapter.post("http://localhost:3001/api/v1/bills", this.state)
+    adapter.post(url + "bills", this.state)
     .then(response => response.json())
     .then(data => {this.props.addNewBill(data)})
     .then(() => {this.resetForm()});
