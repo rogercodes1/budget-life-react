@@ -1,14 +1,13 @@
-import React from "react";
+import React,{Component} from "react";
 import Bills from "./Bills.js";
 import Events from "./Events.js";
 import adapter from "../adapter.js";
-// import Chart from 'chart.js';
 let url = "http://localhost:3001/api/v1/"
 //import BillContainer from "../Bill/BillContainer.js";
 //import EventContainer from "./EventContainer.js";
 // let myChart = new Chart(10);
 
-class HomeContainer extends React.Component {
+class HomeContainer extends Component {
   constructor() {
     super();
 
