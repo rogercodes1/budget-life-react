@@ -33,7 +33,7 @@ class BillContainer extends Component {
   }
 
   removeBill = (bill) => {
-    adapter.delete(`http://localhost:3001/api/v1/bills/${bill.id}`)
+    adapter.delete(url + `bills/${bill.id}`)
     .then(response => response.json())
     .then(() => {
       debugger;
