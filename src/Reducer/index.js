@@ -3,13 +3,7 @@ const defaultState= {
   events:[],
   bills : [],
   transactions:[],
-  yelpParams: {
-    searchTerm: "bars",
-    location: "10004",
-    radius: 3000,
-    limit: 20,
-  },
-  geolocation: [],
+
 }
 
 export default function reducer(state=defaultState,action) {
